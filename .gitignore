@@ -1,0 +1,39 @@
+# Ambiente virtuale
+.venv/
+venv/
+env/
+
+# Dati: grezzi e derivati, troppo pesanti e non da versionare
+data/raw/
+data/processed/
+*.jsonl
+*.parquet
+*.cbm
+annunci_milano*.json
+
+# Credenziali e identita' del crawler (NON versionare)
+datadome.cookie
+immo_id.txt
+*.cookie
+
+# Output rigenerabili
+outputs/
+*.png
+*.svg
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Sistema operativo / editor
+.DS_Store
+.vscode/
+.idea/
+# Log di addestramento di CatBoost
+catboost_info/

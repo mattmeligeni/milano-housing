@@ -1,0 +1,11 @@
+pandas
+numpy
+pyarrow
+scipy
+scikit-learn
+catboost
+xgboost
+shap
+geopy
+matplotlib
+jupyter
