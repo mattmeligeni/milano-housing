@@ -75,7 +75,8 @@ city centre.
 milano-housing/
 ├── src/build_dataset.py          # raw JSONL -> flat table
 ├── notebooks/analisi_modello.ipynb  # EDA, cleaning, models, SHAP, deal detector
-├── tests/test_model.py           # loads the trained model and prices an example home
+├── src/predict_example.py        # loads the trained model and prices an example home
+├── tests/test_build_dataset.py   # unit tests of the dataset builder (no data needed)
 ├── docs/img/                     # charts used in this README
 └── requirements.txt
 ```

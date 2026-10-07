@@ -11,12 +11,13 @@ I campi con leakage (prezzo al m², priceRange, mortgage, ...) sono esclusi di
 proposito e non devono rientrare.
 
 Uso:
-    python build_dataset.py annunci_milano.checkpoint.jsonl \
-        --out-json annunci_milano.json --out-csv annunci_milano_flat.csv \
-        --municipality 8042 --contract v
+    python src/build_dataset.py annunci_milano.checkpoint.jsonl \
+        --out-csv data/processed/annunci_flat.csv \
+        --out-parquet data/processed/annunci_flat.parquet
 """
 
 import json
+import os
 import re
 import csv
 import time
@@ -245,17 +246,22 @@ def build(checkpoint_path, out_csv, out_parquet=None):
             _assert_no_leakage(row)
             rows_all.append(row)
 
-    # dedup per id, ultima occorrenza vince (dato piu' fresco)
+    # dedup per id, ultima occorrenza vince (dato piu' fresco); senza id non si
+    # puo' deduplicare ne' ricollegare al grezzo: si scarta, contandolo a parte.
     dedup = {}
+    n_no_id = 0
     for r in rows_all:
-        if r["id"] is not None:
-            dedup[r["id"]] = r
+        if r["id"] is None:
+            n_no_id += 1
+            continue
+        dedup[r["id"]] = r
     rows = list(dedup.values())
 
     # scrive la tabella piatta in CSV e, se pandas c'e', anche in parquet
     wrote_parquet = False
     if rows:
         cols = list(rows[0].keys())
+        os.makedirs(os.path.dirname(out_csv) or ".", exist_ok=True)
         with open(out_csv, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=cols)
             w.writeheader()
@@ -269,9 +275,9 @@ def build(checkpoint_path, out_csv, out_parquet=None):
             except ImportError:
                 print("pandas/pyarrow assenti: salto il parquet, resta il CSV.")
 
-    n_skipped = len(rows_all) - len(rows)
+    n_dup = len(rows_all) - n_no_id - len(rows)
     print(f"Annunci letti dal checkpoint: {len(rows_all)}")
-    print(f"Righe uniche in tabella: {len(rows)}  (duplicati per id scartati: {n_skipped})")
+    print(f"Righe uniche in tabella: {len(rows)}  (duplicati per id scartati: {n_dup}, senza id: {n_no_id})")
     print(f"Colonne: {len(rows[0]) if rows else 0}")
     print(f"Scritto: {out_csv}" + (f" e {out_parquet}" if wrote_parquet else ""))
     return rows

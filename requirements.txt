@@ -9,3 +9,4 @@ shap
 geopy
 matplotlib
 jupyter
+pytest

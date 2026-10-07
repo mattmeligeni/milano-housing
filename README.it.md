@@ -133,7 +133,8 @@ ragionevolmente efficiente, e i veri mispricing sono rari.
 milano-housing/
 ├── src/build_dataset.py             # grezzo JSONL -> tabella piatta
 ├── notebooks/analisi_modello.ipynb  # EDA, pulizia, modelli, SHAP, rilevatore
-├── tests/test_model.py              # carica il modello e stima una casa d'esempio
+├── src/predict_example.py           # carica il modello e stima una casa d'esempio
+├── tests/test_build_dataset.py      # test del costruttore del dataset (senza dati)
 ├── docs/img/                        # grafici usati in questo README
 └── requirements.txt
 ```

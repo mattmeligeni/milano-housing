@@ -1,10 +1,27 @@
+"""
+predict_example.py
+
+Stima il prezzo di una casa d'esempio con il modello addestrato (non pubblicato:
+va prodotto con il notebook in data/processed/modello_prezzi_milano.cbm).
+
+Uso:
+    python src/predict_example.py
+"""
+
+import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from catboost import CatBoostRegressor
 
+MODELLO = Path("data/processed/modello_prezzi_milano.cbm")
+if not MODELLO.exists():
+    sys.exit(f"Modello non trovato in {MODELLO}: addestralo prima con il notebook.")
+
 # ricarica il modello salvato
 modello = CatBoostRegressor()
-modello.load_model("data/processed/modello_prezzi_milano.cbm")
+modello.load_model(str(MODELLO))
 
 # descrivi una casa: tutte le feature che il modello si aspetta, nell'ordine giusto
 casa = pd.DataFrame([{
