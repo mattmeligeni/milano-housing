@@ -14,6 +14,12 @@ itself.
 ![CatBoost](https://img.shields.io/badge/model-CatBoost-yellow)
 ![R2](https://img.shields.io/badge/R%C2%B2%20(GroupKFold)-0.916-brightgreen)
 ![License](https://img.shields.io/badge/license-PolyForm%20Strict%201.0.0-lightgrey)
+[![Live demo](https://img.shields.io/badge/live%20demo-mattiameligeni.com-1D3F7A)](https://www.mattiameligeni.com/#/progetti/milano-housing)
+
+**[Try the live demo →](https://www.mattiameligeni.com/#/progetti/milano-housing)** Pick a spot on the map of Milan, describe the home and get the estimate. The
+trained model runs entirely in the browser and gives the same estimate as CatBoost, to within a billionth. It
+also shows what changes with a single difference (lift, renovation, floor…) and a map of the same home's price
+across the whole city.
 
 ## Results
 
@@ -76,6 +82,7 @@ milano-housing/
 ├── src/build_dataset.py          # raw JSONL -> flat table
 ├── notebooks/analisi_modello.ipynb  # EDA, cleaning, models, SHAP, deal detector
 ├── src/predict_example.py        # loads the trained model and prices an example home
+├── src/esporta_demo_web.py       # exports the model for the in-browser demo, checked against CatBoost
 ├── tests/test_build_dataset.py   # unit tests of the dataset builder (no data needed)
 ├── docs/img/                     # charts used in this README
 └── requirements.txt
@@ -83,7 +90,8 @@ milano-housing/
 
 **Not included:** the collected listings, the derived datasets and the trained model. They derive from the
 portal's database and cannot be redistributed. The notebook keeps aggregate results and charts; outputs listing
-individual ads have been cleared.
+individual ads have been cleared. The trained model can be tried in the [live demo](https://www.mattiameligeni.com/#/progetti/milano-housing), exported
+by `src/esporta_demo_web.py`.
 
 ## Limits
 

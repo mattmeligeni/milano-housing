@@ -16,6 +16,12 @@ mentire a sé stessa.
 ![CatBoost](https://img.shields.io/badge/modello-CatBoost-yellow)
 ![R2](https://img.shields.io/badge/R%C2%B2%20(GroupKFold)-0.916-brightgreen)
 ![Licenza](https://img.shields.io/badge/licenza-PolyForm%20Strict%201.0.0-lightgrey)
+[![Demo dal vivo](https://img.shields.io/badge/demo%20dal%20vivo-mattiameligeni.com-1D3F7A)](https://www.mattiameligeni.com/#/progetti/milano-housing)
+
+**[Prova la demo dal vivo →](https://www.mattiameligeni.com/#/progetti/milano-housing)** Scegli un punto sulla mappa di Milano, descrivi la casa e ottieni la
+stima. Il modello addestrato gira tutto nel browser e dà la stessa stima di CatBoost, a meno di un miliardesimo.
+Mostra anche cosa cambia con una sola differenza (ascensore, ristrutturazione, piano…) e la mappa del prezzo della
+stessa casa in tutta la città.
 
 ## Risultato
 
@@ -134,6 +140,7 @@ milano-housing/
 ├── src/build_dataset.py             # grezzo JSONL -> tabella piatta
 ├── notebooks/analisi_modello.ipynb  # EDA, pulizia, modelli, SHAP, rilevatore
 ├── src/predict_example.py           # carica il modello e stima una casa d'esempio
+├── src/esporta_demo_web.py          # esporta il modello per la demo nel browser, verificata contro CatBoost
 ├── tests/test_build_dataset.py      # test del costruttore del dataset (senza dati)
 ├── docs/img/                        # grafici usati in questo README
 └── requirements.txt
@@ -141,7 +148,8 @@ milano-housing/
 
 **Non inclusi:** gli annunci raccolti, i dataset derivati e il modello addestrato. Derivano dalla banca dati del
 portale e non si possono ridistribuire. Il notebook conserva risultati aggregati e grafici; le uscite che elencano
-singoli annunci sono state svuotate.
+singoli annunci sono state svuotate. Il modello addestrato si può provare nella [demo dal vivo](https://www.mattiameligeni.com/#/progetti/milano-housing),
+esportato da `src/esporta_demo_web.py`.
 
 ## Uso del modello
 
